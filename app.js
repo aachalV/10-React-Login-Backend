@@ -5,9 +5,17 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
 const userRouter = require("./routes/userRoutes");
-
+const protectRoute = require("./middlewares/protectRoute");
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
+
+app.get("/dashboard", protectRoute, (req, res) => {
+  //console.log("Headers :", req.header);
+  console.log("Current User :", req.currentUser);
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"));
+});
 app.use("/users", userRouter);
 
 app.listen(

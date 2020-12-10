@@ -83,6 +83,7 @@ const createPasswordHash = async (req, res, next) => {
 //
 // find user with the email
 // compare the psw with hash
+//if authenticated ..generate jwt token
 const isUserRegistered = (req, res, next) => {
   let findUser = users.find((user) => {
     return user.email == req.body.email;
