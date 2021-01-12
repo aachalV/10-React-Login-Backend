@@ -3,11 +3,13 @@ const fs = require("fs");
 const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
+const cors = require("cors");
 
 const userRouter = require("./routes/userRoutes");
 const protectRoute = require("./middlewares/protectRoute");
 const app = express();
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 

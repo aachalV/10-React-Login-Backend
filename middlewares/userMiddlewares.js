@@ -9,22 +9,17 @@ const fileName = path.join(__dirname, "..", "data", "users.json");
 const users = JSON.parse(fs.readFileSync(fileName, "utf-8"));
 
 const checkRequestBody = (req, res, next) => {
-  // validationArray contains list of keys that to be present
-  //signUp
-  // validationArray = ["email","password","confirmPassword"]
-  //login
-  //validationArray = ["email","password"]
   let validationArray;
   switch (req.url) {
     case "/signup":
-      validationArray = ["email", "password", "confirmPassword"];
+      validationArray = ["email", "password"];
       break;
     case "/login":
       validationArray = ["email", "password"];
       break;
     default:
       return sendErrorMessage(
-        new AppError(400, "unsuccessful", "requested url not present"),
+        new AppError(400, "Unsuccessfull", "requested url not present"),
         req,
         res
       );
@@ -34,9 +29,8 @@ const checkRequestBody = (req, res, next) => {
     return req.body[key] && req.body[key].trim().length;
   });
   if (!result) {
-    //return res.send("Invalid Body");
     return sendErrorMessage(
-      new AppError(400, "Unsuccesful", "Invalid Request body"),
+      new AppError(400, "Unsuccesfull", "Invalid Request body"),
       req,
       res
     );
@@ -58,7 +52,7 @@ const isEmailUnique = (req, res, next) => {
     return user.email == req.body.email;
   });
   if (findUser) {
-    return res.send("user already registered");
+    return res.send("User already registered");
   }
   next();
 };
@@ -89,11 +83,12 @@ const isUserRegistered = (req, res, next) => {
     return user.email == req.body.email;
   });
   if (!findUser) {
-    return sendErrorMessage(
-      new AppError(422, "Unsuccessful", "User not registered"),
-      req,
-      res
-    );
+    // return sendErrorMessage(
+    //   new AppError(422, "Unsuccessful", "User not registered"),
+    //   req,
+    //   res
+    // );
+    return res.send("User not registered, Sigup first");
   }
   req.currentUser = { ...findUser };
   next();

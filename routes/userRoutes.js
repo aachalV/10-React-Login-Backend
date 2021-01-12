@@ -3,7 +3,6 @@ const { signUpUser, loginUser } = require("../controllers/userController");
 const {
   checkRequestBody,
   isEmailValid,
-  checkConfirmPassword,
   isEmailUnique,
   createPasswordHash,
   isUserRegistered,
@@ -17,7 +16,6 @@ router
     checkRequestBody,
     isEmailValid,
     isEmailUnique,
-    checkConfirmPassword,
     createPasswordHash,
     signUpUser
   );
