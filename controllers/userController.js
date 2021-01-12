@@ -14,7 +14,6 @@ const users = JSON.parse(fs.readFileSync(fileName, "utf-8"));
 const signUpUser = (req, res, next) => {
   //create new user
   let newUser = new User(req.body.email, req.body.password);
-  console.log("New User", newUser);
   users.push(newUser);
   fs.writeFile(fileName, JSON.stringify(users, null, 2), (err) => {
     if (err) {
@@ -25,7 +24,6 @@ const signUpUser = (req, res, next) => {
   });
 };
 const loginUser = async (req, res, next) => {
-  console.log("Current User", req.currentUser);
   try {
     //if psw matches
     let result = await bcrypt.compare(
@@ -57,7 +55,6 @@ const loginUser = async (req, res, next) => {
       ],
     });
     //res.send("User logged in succesfully");
-    console.log("Generated Token", jwtToken);
   } catch (err) {
     return sendErrorMessage(
       new AppError(500, "Unsuccessful", "Internal Error"),
