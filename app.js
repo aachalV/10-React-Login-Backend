@@ -21,6 +21,6 @@ app.get("/dashboard", protectRoute, (req, res) => {
 app.use("/users", userRouter);
 
 app.listen(
-  process.env.PORT,
+  process.env.PORT || 3000,
   console.log(`App started on port ${process.env.PORT}`)
 );

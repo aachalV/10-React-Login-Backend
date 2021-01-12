@@ -3,3 +3,4 @@ package.json
 test.js
 test2.js
 backend
+config.env
