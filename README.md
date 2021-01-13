@@ -10,3 +10,9 @@ Tried to implement Backend User authentication.
   - isEmailUnique
   - createPasswordHash
   - isUserRegistered
+
+## Remember to add config.env file
+
+* In config.env file add the following 
+  * PORT = 5000
+  * JWT_SECRET = "(Add some text here)"
